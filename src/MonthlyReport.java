@@ -23,19 +23,22 @@ public class MonthlyReport extends Report {
         }
         System.out.println("Месяц: " + month);
         MonthlyRow maxProfitRow = null;
-        Integer maxProfit = 0;
+        int maxProfit = 0;
+        //Если нет особой необходимость лучше использовать примитивный тип а не объектный,
+        // меньше памяти занимает, не нагружает сборщик мусора,
+        // в общем лайтовей в обслуживании JVMом
         MonthlyRow maxExpenseRow = null;
-        Integer maxExpense = 0;
+        int maxExpense = 0;
         for (MonthlyRow row: data) {
             if (row.isExpense()) {
-                Integer expense = row.getQuantity() * row.getSumOfOne();
+                int expense = row.getQuantity() * row.getSumOfOne();
                 if (expense > maxExpense) {
                     maxExpense = expense;
                     maxExpenseRow = row;
                 }
             }
             else {
-                Integer profit = row.getQuantity() * row.getSumOfOne();
+                int profit = row.getQuantity() * row.getSumOfOne();
                 if (profit > maxProfit) {
                     maxProfit = profit;
                     maxProfitRow = row;
@@ -59,7 +62,7 @@ public class MonthlyReport extends Report {
     }
 
     public Integer getProfitSum() {
-        Integer result = 0;
+        int result = 0;
         for (MonthlyRow row: data) {
             if (!row.isExpense()) {
                 result = result + row.getQuantity() * row.getSumOfOne();
@@ -69,7 +72,7 @@ public class MonthlyReport extends Report {
     }
 
     public Integer getExpenseSum() {
-        Integer result = 0;
+        int result = 0;
         for (MonthlyRow row: data) {
             if (row.isExpense()) {
                 result = result + row.getQuantity() * row.getSumOfOne();

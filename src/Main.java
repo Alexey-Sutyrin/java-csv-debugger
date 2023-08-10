@@ -3,8 +3,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args)  {
+        //Убрал throws Exception - Exception в методе не используется, можно убрать
         Scanner scanner = new Scanner(System.in);
 
         ArrayList<MonthlyReport> reports = new ArrayList<MonthlyReport>();
@@ -17,7 +17,7 @@ public class Main {
             // Вывод доступных пунктов меню в консоль
             System.out.println("1 - Считать месячные отчеты");
             System.out.println("2 - Считать годовой отчет");
-            System.out.println("3 - Сверить отчеты на отсутсвие ошибок");
+            System.out.println("3 - Сверить отчеты на отсутствие ошибок");
             System.out.println("4 - Вывести информацию о месячных отчетах");
             System.out.println("5 - Вывести информацию о годовом отчете");
             System.out.println("0 - Выход");
@@ -35,7 +35,7 @@ public class Main {
                 case 1:
                     // Считываем месячные отчеты из представленных на старте
                     reports.clear();
-                    for (Integer i = 1; i < 4; i++) {
+                    for (int i = 1; i < 4; i++) { //Лучше в цикле использовать примитивный тип просто int вместо Integer
                         MonthlyReport report = new MonthlyReport();
                         report.load("m.20210"+i+".csv");
                         reports.add(report);
@@ -50,7 +50,7 @@ public class Main {
                     if (reports.size() == 0) {
                         System.out.println("Месячные отчеты не загружены");
                     }
-                    else if (yearlyReport.isLoaded() == false) {
+                    else if (!yearlyReport.isLoaded()) {  //yearlyReport.isLoaded() == false - Можно записать короче
                         System.out.println("Годовой отчет не загружен");
                     }
                     else {
